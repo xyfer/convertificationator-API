@@ -26,6 +26,7 @@ namespace convertificationator_API
         {
             services.AddMvc();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +38,9 @@ namespace convertificationator_API
                 app.UseDeveloperExceptionPage();
                 builder.AddUserSecrets<Startup>();
             }
-
+            app.UseCors(
+                options => options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials()
+            );
             app.UseMvc();
         }
 
