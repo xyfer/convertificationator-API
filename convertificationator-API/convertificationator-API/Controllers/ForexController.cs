@@ -33,7 +33,7 @@ namespace convertificationator_API.Controllers
             {
                 return NotFound();
             }
-            return Ok(response);
+            return Content(response, "application/json");
         }
     }
 }
