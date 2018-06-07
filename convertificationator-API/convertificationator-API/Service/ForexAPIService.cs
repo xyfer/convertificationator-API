@@ -1,5 +1,4 @@
-﻿using convertificationatorAPI.Model;
-using RestSharp;
+﻿using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace convertificationatorAPI.Service
 {
     public class ForexAPIService { 
 
-        public string getForex(ForexRequest forexReq, string apiKey)
+        public string getForex(string apiKey)
         {
             var client = new RestClient("http://www.apilayer.net/api");
             var request = new RestRequest("/live")
@@ -19,7 +18,6 @@ namespace convertificationatorAPI.Service
                 Method = Method.GET
             };
             request.AddQueryParameter("access_key", apiKey);
-            request.AddQueryParameter("currencies", forexReq.TargetCurrency);
             request.AddHeader("Accept", "application/json");
             var response = client.Execute(request);
             var content = response.Content;

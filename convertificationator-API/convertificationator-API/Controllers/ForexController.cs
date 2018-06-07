@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using convertificationatorAPI.Model;
 using convertificationatorAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,11 +23,9 @@ namespace convertificationator_API.Controllers
             apiService = new ForexAPIService();
         }
 
-        [HttpGet("{baseCurrency}/{targetCurrency}")]
-        public IActionResult Get(string baseCurrency, string targetCurrency)
+        public IActionResult Get()
         {
-            ForexRequest req = new ForexRequest { BaseCurrency = baseCurrency, TargetCurrency = targetCurrency };
-            string response = apiService.getForex(req, apiKey);
+            string response = apiService.getForex(apiKey);
             if (response == null)
             {
                 return NotFound();
